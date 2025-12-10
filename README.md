@@ -1,91 +1,81 @@
-# Laravel Backend Exam
+# Mortgage Loan Calculator
 
-A Laravel application running with Docker Sail, MySQL 8, and phpMyAdmin.
+A Laravel-based mortgage loan calculator web application that generates amortization schedules with support for extra repayments.
 
-## Services
+## Screenshots
 
-| Service | URL | Port |
-|---------|-----|------|
-| Laravel Application | http://localhost | 80 |
-| phpMyAdmin | http://localhost:8080 | 8080 |
-| MySQL 8 | localhost:3306 | 3306 |
+### Loan Calculator Form
+![Loan Calculator Form](docs/screenshots/loan-calculator-form.png)
 
-## Getting Started
+### Loan Schedule with Header (Requirement #7)
+![Loan Schedule Header](docs/screenshots/loan-schedule-header.png)
 
-### Prerequisites
+### Extra Repayment Schedule
+![Extra Repayment Schedule](docs/screenshots/extra-repayment-schedule.png)
+
+## Prerequisites
 
 - Docker Desktop installed and running
+- Git
 
-### Installation
+## Quick Start
 
-1. **Start Docker Desktop**
-
-2. **Build and start the containers:**
-   ```bash
-   docker compose up -d --build
-   ```
-
-3. **Install Composer dependencies (first time only):**
-   ```bash
-   docker compose exec laravel.test composer install
-   ```
-
-4. **Generate application key (first time only):**
-   ```bash
-   docker compose exec laravel.test php artisan key:generate
-   ```
-
-5. **Run migrations:**
-   ```bash
-   docker compose exec laravel.test php artisan migrate
-   ```
-
-## Accessing the Application
-
-- **Laravel App**: http://localhost
-- **phpMyAdmin**: http://localhost:8080
-  - Server: mysql
-  - Username: sail
-  - Password: password
-
-## Database Credentials
-
-- **Host**: mysql (from inside containers) or localhost (from host)
-- **Port**: 3306
-- **Database**: laravel
-- **Username**: sail
-- **Password**: password
-
-## Useful Commands
+### 1. Clone the Repository
 
 ```bash
-# Start containers
-docker compose up -d
-
-# Stop containers
-docker compose down
-
-# View logs
-docker compose logs -f
-
-# Access Laravel container shell
-docker compose exec laravel.test bash
-
-# Run Artisan commands
-docker compose exec laravel.test php artisan <command>
-
-# Run Composer commands
-docker compose exec laravel.test composer <command>
-
-# Run tests
-docker compose exec laravel.test php artisan test
+git clone <repository-url>
+cd Backend-Exam
 ```
 
-## Container Management
+### 2. Start Docker Desktop
 
-You can view and manage your containers in Docker Desktop after running `docker compose up -d`.
+Make sure Docker Desktop is running on your machine.
 
-## License
+### 3. Build and Start Containers
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+docker compose up -d --build
+```
+
+### 4. Install Dependencies
+
+```bash
+docker compose exec laravel.test composer install
+```
+
+### 5. Generate Application Key
+
+```bash
+docker compose exec laravel.test php artisan key:generate
+```
+
+### 6. Run Database Migrations
+
+```bash
+docker compose exec laravel.test php artisan migrate
+```
+
+### 7. Access the Application
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| Laravel App | http://localhost | Main application |
+| phpMyAdmin | http://localhost:8080 | Database management |
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/v1/loans/calculate` | Calculate loan and generate schedules |
+| GET | `/api/v1/loans` | List all loans |
+| GET | `/api/v1/loans/{id}` | Get specific loan |
+| DELETE | `/api/v1/loans/{id}` | Delete a loan |
+| GET | `/api/v1/loans/{id}/amortization-schedule` | Get amortization schedule |
+| GET | `/api/v1/loans/{id}/extra-repayment-schedule` | Get extra repayment schedule |
+
+## Running Tests
+
+```bash
+docker compose exec laravel.test php artisan test
+```
 
